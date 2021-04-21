@@ -1,0 +1,99 @@
+Scelto un mese si vuole la sequenza di città che minimizza il costo per i primi 15 giorni del mese.
+
+INPUT:
+	-Insieme di dati di partenza di tipo citta (PARTENZA)
+	-tutte città devono essere visitate almeno una volta                                    counter!=0 per tutte
+	-scelta una città il tecnico non si sposta finchè non ha trascorso 3 giorni consecutivi counter>=3
+	-nessuna città si possono trascorrere più di 6 giornate consecutive                     counter<=6
+OUTPUT:
+	-Insieme di oggetti di tipo citta
+	tale che:
+		-COSTO= 100*(spostamento in due giorni consecutivi in città diverse) + umidità città in quel giorno
+
+CASI TERMINALI
+1)ho raggiunto le 6 giornate consecutive
+2)livello=15
+2)costo>= costoSoluzioneMigliore
+
+
+metodo cerca()
+1) livello 0 -> scelgo torino per tre giorni, poi milano e poi genova oppure scelgo milano per tre giorni etc..
+   calcolo costo per i primi tre giorni e aggiungo al costo, quando cambio la città aggiungo i 100£
+   
+
+for(Citta c: citta) {
+***VERSIONE1***
+			if(c.getCounter()>this.NUMERO_GIORNI_CITTA_MAX)
+				return;
+			else {
+				parziale.add(c);
+				c.increaseCounter();
+				costo+=c.getRilevamenti().get(livello).getUmidita();
+***VERSIONE2***
+			if(c.getCounter()<=this.NUMERO_GIORNI_CITTA_MAX)
+				parziale.add(c);
+				c.increaseCounter();
+				costo+=c.getRilevamenti().get(livello).getUmidita();
+				
+	***AGGIUNTI PEZZO SUCCESSIVO***
+			
+if(livello<3 && livello>0)
+	//controllo che siano uguali e se lo sono va bene, se no return
+	if(!(parziale.get(l).getNome().equals(parziale.get(l-1).getNome()))
+		return;
+if(livello>=3)
+	//controllo se ho cambiato città, se non l'ho cambiata va bene, se l'ho cambiata va bene 
+	if(!(parziale.get(l).getNome().equals(parziale.get(l-1).getNome()) && !nuova)
+		nuova=true;
+		cittaPrecedente1=parziale.get(l);	
+		cittaPrecedente2=null;
+		costo+=100;
+		
+	else if(nuova && cittaPrecedente2==null)
+		if(parziale.get(l).getNome().equals(cittaPrecedente1.getNome())
+			cittaPrecedente2=parziale.get(l);
+		else
+			return;
+			
+	else if(cittaPrecedente2!=null)
+		if(parziale.get(l).getNome().equals(cittaPrecedente2.getNome())))
+			nuova=false;
+		else
+			return;
+		
+	
+	
+	
+	
+	
+	
+	cerca(parziale,l+1,costo);
+	parziale.remove(c);
+	c.setCounter(c.getCounter()-1);
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+   
+   

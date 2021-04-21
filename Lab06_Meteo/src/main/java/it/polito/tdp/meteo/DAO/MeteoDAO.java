@@ -38,9 +38,15 @@ public class MeteoDAO {
 			throw new RuntimeException(e);
 		}
 	}
-
+	/**
+	 * dato un mese e una località restituisce tutti i rilevamenti per i primi 15 giorni di quel mese per 
+	 * quella località
+	 * @param mese
+	 * @param localita
+	 * @return
+	 */
 	public List<Rilevamento> getAllRilevamentiLocalitaMese(int mese, String localita) {
-		final String sql="SELECT s.Localita, EXTRACT(MONTH FROM s.`Data`) AS MONTH, s.`Data`, s.Umidita  "
+		final String sql="SELECT s.Localita, EXTRACT(MONTH FROM s.`Data`) AS MONTH, EXTRACT(DAY FROM s.`Data`) AS DAY, s.`Data`, s.Umidita  "
 				+ "FROM situazione s "
 				+ "WHERE s.Localita=? ";
 		
@@ -53,7 +59,7 @@ public class MeteoDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				if(rs.getInt("MONTH")==mese) {
+				if(rs.getInt("MONTH")==mese /*&& (rs.getInt("DAY")>=1 && rs.getInt("DAY")<=15)*/) {
 					Rilevamento r= new Rilevamento(rs.getString("Localita"),rs.getDate("Data").toLocalDate(),rs.getInt("Umidita"));
 					rilevamenti.add(r);
 				}
